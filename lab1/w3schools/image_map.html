@@ -1,0 +1,31 @@
+<!-- Use the HTML <map> element to define an image map
+    Use the HTML <area> element to define the clickable areas in the image map
+    Use the HTML usemap attribute of the <img> element to point to an image map -->
+
+<!-- rect - defines a rectangular region
+circle - defines a circular region
+poly - defines a polygonal region
+default - defines the entire region
+ -->
+
+ <img src="workplace.jpg" alt="Workplace" usemap="#workmap">
+
+<map name="workmap">
+  <area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.htm">
+  <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm">
+  <area shape="circle" coords="337,300,44" alt="Coffee" href="coffee.htm">
+</map>
+
+
+<!-- usemap value starts with a hash tag # followed by the name of the image map, and is used to create a relationship between the image and the image map -->
+<img src="workplace.jpg" alt="Workplace" usemap="#workmap">
+
+<map name="workmap">
+    <area shape="circle" coords="337,300,44" href="coffee.htm" onclick="myFunction()">
+  </map>
+  
+  <script>
+  function myFunction() {
+    alert("You clicked the coffee cup!");
+  }
+  </script>
