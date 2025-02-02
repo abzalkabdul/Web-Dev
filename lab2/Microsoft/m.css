@@ -1,0 +1,278 @@
+body{
+    margin:0;
+    font-family: 'Segoe UI', SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.navbar{
+    height: 54px;
+    /* background-color: brown; */
+}
+
+.navdiv{
+    display: flex;
+    /* background-color: #99cbf5; */
+    margin-left: 89.2px;
+    margin-right: 89.2px;
+}
+
+.logo-link-box{
+    margin-top: 1px;
+    width: 137px;
+    height: 54px;
+    /* background-color: #073a64; */
+}
+
+.photo{
+    padding-top: 14px;
+    padding-right: 6px;
+    padding-left: 10px;
+    padding-bottom: 18px;
+    width:108px;
+    height: 22px;
+}
+/* logo finished */
+
+
+.menu1 {
+    padding-top:0px;
+    width: 1085px;
+    /* background-color: aqua; */
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item-box{
+    margin-top: 5px;
+    margin:5px;
+    padding-top:16px;
+    padding-left:8px;
+    padding-right: 8px;
+    padding-bottom: 14px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 13.5px;
+    color:rgb(17, 17, 17);
+}
+
+.menu2{
+    display: flex;
+    align-items: center;
+    width: 400px;    
+}
+
+.menu2 ul{
+    gap:30px;
+}
+
+.navbar a{
+    text-decoration: none;
+}
+
+.navbar a:hover{
+    text-decoration: underline;
+}
+
+.payment{
+    display: table;
+    width: 100%;
+    height: 45px;
+}
+
+.payment a{
+    display:table-cell;
+    vertical-align: middle;
+    background-color:#0167b8;
+    color:white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.payment a:hover{
+    text-decoration: underline;
+}
+
+.container-image-slide{
+    position:relative;
+    width:100%;
+    overflow: hidden;
+}
+.slider{
+    display: flex;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overflow-x: hidden;
+}
+
+.slide{
+    position: relative;
+    flex: 1 0 100%;
+}
+
+.slider img{
+    scroll-snap-align: start;
+    overflow: hidden;
+}
+
+.slider-nav{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:40px;
+    height: 40px;
+}
+
+.slider-nav div{
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.slider-nav a:active{
+    border: 2px dotted black;
+}
+
+
+.slider-nav a:nth-child(1){
+    padding-right:10px;
+}
+
+.slider-nav a:nth-child(4){
+    padding-left:10px;
+} 
+
+.slider-nav a{
+    text-decoration: none;
+    color:black;
+    font-size: 20px;
+}
+
+
+
+.first{
+    position:absolute;
+    top:9%;
+    left:5%;
+    color:black;
+    background-color: white;
+    padding:50px;
+    width:33%;
+    height: 30%;
+}
+
+.cart-on-slider h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.cart-on-slider h5 {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.cart-on-slider button {
+    background-color: #0167b8;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.second{
+    position:absolute;
+    top:9%;
+    left:5%;
+    color:black;
+    padding:50px;
+    width:33%;
+    height: 30%;
+}
+
+.slider-nav{
+    display: flex;
+}
+
+.product{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 95px;
+    padding-right: 95px;
+}
+
+.icons{
+    margin-top:70px;
+    padding-left: 250px;
+    padding-right: 250px;
+}
+
+.icons a{
+    color:#0167b8;
+    font-weight: 500;
+}
+
+.icon{
+    width:45px;
+    margin-bottom: 5.5px;
+}
+
+
+.device{
+    text-align: center;
+}
+
+.cart{
+    width:380px;
+    height: 500px;
+    box-shadow: 0px 3px 6px 0px rgba(153,153,153,0.5);;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+
+}
+
+.carts{
+    margin-top: 85px;
+    margin-bottom: 100px;
+}
+
+
+.text-part {
+    flex-grow: 1;
+    padding-top: 20px;
+    padding-left: 20px;
+    height: 204px;
+
+}
+
+.carts a{
+    color:black;
+    text-decoration: none;
+    font-weight: 100;
+}
+
+.button-part {
+    height: 60px;
+    margin:0;
+}
+
+.button-part button {
+    background-color: #0167b8;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
