@@ -4,12 +4,10 @@ body{
 }
 .navbar{
     height: 54px;
-    /* background-color: brown; */
 }
 
 .navdiv{
     display: flex;
-    /* background-color: #99cbf5; */
     margin-left: 89.2px;
     margin-right: 89.2px;
 }
@@ -18,7 +16,6 @@ body{
     margin-top: 1px;
     width: 137px;
     height: 54px;
-    /* background-color: #073a64; */
 }
 
 .photo{
@@ -29,13 +26,14 @@ body{
     width:108px;
     height: 22px;
 }
-/* logo finished */
+
+
+
 
 
 .menu1 {
     padding-top:0px;
     width: 1085px;
-    /* background-color: aqua; */
 }
 
 ul{
