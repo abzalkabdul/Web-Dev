@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        alert('Hello'); alert('World');
+
+        alert('Hello');
+        alert('World'); 
+
+        alert(3 +
+        1
+        + 2);
+
+        alert("Hello");
+        [1, 2].forEach(alert); //correct one
+
+        alert("Hello")
+        [1, 2].forEach(alert); //not correct one
+
+        alert("Hello")[1, 2].forEach(alert); //Here’s how the engine sees it:
+
+        // This comment occupies a line of its own
+        alert('Hello');
+
+        alert('World'); // This comment follows the statement
+
+        /* An example with two messages.
+        This is a multiline comment.
+        */
+        alert('Hello');
+        alert('World');
+
+        /*
+        /* nested comment ?!? */
+        */
+        alert( 'World' ); //error!
+    </script>
+    
+</body>
+</html>

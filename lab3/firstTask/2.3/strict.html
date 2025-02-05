@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+    // this code works the modern way
+
+
+    alert("some code");
+    // "use strict" below is ignored--it must be at the top
+    "use strict";
+    // strict mode is not activated
+    </script>
+
+    <!-- There’s no way to cancel use strict
+There is no directive like "no use strict" that reverts the engine to old behavior.
+
+Once we enter strict mode, there’s no going back. -->
+
+    (function() {
+        'use strict';
+
+    // ...your code here...
+    })()
+</body>
+</html>
