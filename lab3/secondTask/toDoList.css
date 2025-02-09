@@ -1,0 +1,65 @@
+*{
+    margin:0;
+}
+#header{
+    padding: 20px 0px 20px 100px;
+    background-color: black;
+    color: rgb(143, 132, 132);     
+}
+#page{
+    margin: 5% 0 0 20%; 
+}
+#title{
+    font-family: serif;
+}
+#display{
+    border: 1px solid rgb(215, 209, 209);
+    width: 700px;
+    height: 40px;
+    font-size: 16px;
+    margin: 16px 16px 16px 30px;
+    padding-left: 15px;
+}
+#add{
+    width: 90px;
+    height: 40px;
+    background-color: rgb(21, 0, 255);
+    color: white;
+    border-radius: 6px;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-item {
+    height: 50px;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 20px;
+}
+
+.task-checkbox {
+    cursor: pointer;
+    margin-right: 40px;
+}
+
+.task-text{
+    width: 750px;
+}
+
+.delete-add {
+    cursor: pointer;
+    border:none;
+    background-color: transparent;
+    font-size: medium;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+    opacity: 0.6;
+}
