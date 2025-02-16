@@ -21,13 +21,18 @@ add.addEventListener('click', () => {
     deleteAdd.textContent = '🗑';
     deleteAdd.className = 'delete-add';
 
-    checkbox.addEventListener('change', () => {
-        taskText.classList.toggle('completed', checkbox.checked);
+    checkbox.addEventListener('click', () => {
+        if (checkbox.checked) {
+            taskText.classList.add('completed');
+        }
+        else {
+            taskText.classList.add('completed');
+        }
     });
 
     deleteAdd.addEventListener('click', () => taskDiv.remove());
 
     taskDiv.append(checkbox, taskText, deleteAdd);
-    container.appendChild(taskDiv);
-    display.value = '';
+    container.append(taskDiv);
+  
 });

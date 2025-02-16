@@ -8,8 +8,8 @@ body{
 
 .navdiv{
     display: flex;
-    margin-left: 89.2px;
-    margin-right: 89.2px;
+    justify-content: space-between;
+
 }
 
 .logo-link-box{
@@ -32,6 +32,7 @@ body{
 
 
 .menu1 {
+    display:flex;
     padding-top:0px;
     width: 1085px;
 }
@@ -60,11 +61,12 @@ ul{
 .menu2{
     display: flex;
     align-items: center;
-    width: 400px;    
+    width: 600px;    
 }
 
 .menu2 ul{
-    gap:30px;
+
+    gap:20px;
 }
 
 .navbar a{
