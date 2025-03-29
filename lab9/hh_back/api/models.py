@@ -14,3 +14,6 @@ class Vacancy(models.Model):
     description = models.TextField('')
     salary = models.FloatField(default=0)
     company = models.ForeignKey(Company, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} -> {self.salary}"
