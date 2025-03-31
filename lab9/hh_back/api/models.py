@@ -17,3 +17,11 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return f"{self.name} -> {self.salary}"
+    
+    def to_json(self):
+        return{
+        'name': self.name,
+        'description': self.description,
+        'salary': self.salary,
+        'company': self.company.id,
+        }
