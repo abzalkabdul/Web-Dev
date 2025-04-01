@@ -2,6 +2,8 @@ import json
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.shortcuts import render
+
+from api.serializers import VacancySerializer
 from .models import Company, Vacancy
 from django.views.decorators.csrf import csrf_exempt
 
@@ -35,8 +37,8 @@ def c_vacancies_list(request, company_id):
 def vacancies_list(request):
     if request.method == "GET":
         v_list = Vacancy.objects.all()
-        v_list_json = [v.to_json() for v in v_list]
-        return JsonResponse(v_list_json, safe=False, json_dumps_params={'indent': 4})
+        serializer = VacancySerializer(v_list, many=True)
+        return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 4})
     
     elif request.method=="POST":
         data = json.loads(request.body)
