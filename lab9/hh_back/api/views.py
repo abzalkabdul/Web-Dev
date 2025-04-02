@@ -1,95 +1,72 @@
 import json
 from django.http import JsonResponse
-from django.forms.models import model_to_dict
-from django.shortcuts import render
 
-from api.serializers import VacancySerializer
+from api.serializers import VacancySerializer, CompanySerializer
 from .models import Company, Vacancy
 from django.views.decorators.csrf import csrf_exempt
 
 
 def c_list(request):
-    c_list = Company.objects.all().values() # Queryset -> ValuesQuerySet(dict)
-    return JsonResponse(list(c_list), safe=False, json_dumps_params = {'indent': 4})
+    c_list = Company.objects.all()
+    serializer = CompanySerializer(c_list, many=True)
+    return JsonResponse(serializer.data, safe=False, json_dumps_params = {'indent': 4})
 
 
 def get_company(request, company_id):
-    try:
-        company = Company.objects.get(pk=company_id)
-        company_data = model_to_dict(company)
-    except Company.DoesNotExist as e:
-        return JsonResponse({"error": str(e)}, status=404)
-
-    return JsonResponse(company_data, json_dumps_params={'indent': 4})
+    company = Company.objects.get(pk=company_id)
+    serializer = CompanySerializer(company)
+    return JsonResponse(serializer.data, json_dumps_params={"indent": 4})
 
 
 def c_vacancies_list(request, company_id):
-    try: 
         company = Company.objects.get(pk=company_id)
-        c_vacancies_list = company.vacancy_set.all().values()
-    except Company.DoesNotExist as e:
-        return JsonResponse({"error": str(e)}, status=404)
-
-    return JsonResponse(list(c_vacancies_list), safe=False, json_dumps_params={"indent": 4})
+        c_vacancies_list = company.vacancy_set.all()
+        serializer = VacancySerializer(c_vacancies_list, many=True)
+        return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 4})
 
 
 @csrf_exempt
 def vacancies_list(request):
     if request.method == "GET":
         v_list = Vacancy.objects.all()
-        serializer = VacancySerializer(v_list, many=True)
+        serializer = VacancySerializer(v_list, many=True, read_only=True)
         return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 4})
-    
-    elif request.method=="POST":
-        data = json.loads(request.body)
-        # ForeignKey expects a Company object, not just an ID.
-        company = Company.objects.get(id=data['company_id'])
-        try:
-            vacancy = Vacancy.objects.create(
-                name=data['name'],
-                description=data['description'],
-                salary=data['salary'],
-                company=company,
-            )
-        except Exception as e:
-            return JsonResponse({'error': str(e)})
-        
-        return JsonResponse(vacancy.to_json(), status=201)
-    
-    # If ID is included in the JSON request, we should use PUT or DELETE instead of POST.
-    elif request.method == "PUT": 
-        data = json.loads(request.body)
-        # ForeignKey expects a Company object, not just an ID.
-        company = Company.objects.get(id=data['company_id'])
-        try:
-            vacancy = Vacancy.objects.get(id=data['id'])
-            vacancy.name=data['name']
-            vacancy.description=data['description']
-            vacancy.salary=data['salary']
-            vacancy.company=company
-            vacancy.save()
-            return JsonResponse(vacancy.to_json())
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=404)
 
-        
+    elif request.method == "POST":
+        new_data = json.loads(request.body)
+        serializer = VacancySerializer(data=new_data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == "PUT":
+        new_data = json.loads(request.body)
+        vacancy = Vacancy.objects.get(pk=new_data['id'])
+        serializer = VacancySerializer(instance=vacancy, data=new_data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
+        return JsonResponse(serializer.errors, status=400)
+    
 
 
 @csrf_exempt
 def get_vacancy(request, vacancy_id):
     try: 
         vacancy = Vacancy.objects.get(pk=vacancy_id)
-        vacancy_data = model_to_dict(vacancy)
+        vacancy_data = VacancySerializer(vacancy)
     except Vacancy.DoesNotExist as e:
-        return JsonResponse({"error": str(e)}, json_dumps_params={"indent": 4}) 
+        return JsonResponse({"error": str(e)}, status=400) 
     
     if request.method=="DELETE":
         vacancy.delete()
         return JsonResponse({"message": f"Vacancy with id-{vacancy_id} is deleted"})
-
     return JsonResponse(vacancy_data, json_dumps_params={"indent": 4})
 
+
+
 def list_top_ten(request):
-    top_ten = Vacancy.objects.order_by("-salary")[:10]
-    list_top_ten = [model_to_dict(t) for t in top_ten]
-    return JsonResponse(list_top_ten, safe=False, json_dumps_params={"indent":4})
+    list_top_ten = Vacancy.objects.order_by("-salary")[:10]
+    ten_vacancies = VacancySerializer(list_top_ten, many=True)
+    return JsonResponse(ten_vacancies.data, safe=False, json_dumps_params={"indent":4})
