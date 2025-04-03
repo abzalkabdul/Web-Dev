@@ -3,6 +3,7 @@ import json
 from api.serializers import VacancySerializer, CompanySerializer
 from api.models import Company, Vacancy
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request
@@ -27,45 +28,40 @@ def c_vacancies_list(Request, company_id):
         return Response(serializer.data)
 
 
-@api_view(['GET', 'POST', 'PUT'])
+@api_view(['GET', 'POST'])
 def vacancies_list(Request):
     if Request.method == "GET":
         v_list = Vacancy.objects.all()
         serializer = VacancySerializer(v_list, many=True, read_only=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_404_NOT_FOUND)
 
     elif Request.method == "POST":
-        new_data = json.loads(Request.body)
-        serializer = VacancySerializer(data=new_data)
+        serializer = VacancySerializer(data=Request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
-
-    elif Request.method == "PUT":
-        new_data = json.loads(Request.body)
-        vacancy = Vacancy.objects.get(pk=new_data['id'])
-        serializer = VacancySerializer(instance=vacancy, data=new_data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=200)
-        return Response(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
 
-@api_view(['GET', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def get_vacancy(Request, vacancy_id):
-        
-    vacancy = Vacancy.objects.get(pk=vacancy_id)
-    serializer = VacancySerializer(vacancy)
+    vacancy = Vacancy.objects.get(vacancy_id)
 
     if Request.method == 'GET':
-            return Response(serializer.data)  
+        serializer = VacancySerializer(vacancy)
+        return Response(serializer.data)  
 
-    elif Request.method=="DELETE":
+    elif Request.method == "DELETE":
         vacancy.delete()
         return Response({"message": f"Vacancy with id-{vacancy_id} is deleted"})
-    return Response(serializer.data)
+
+    elif Request.method == "PUT":
+        serializer = VacancySerializer(instance=vacancy, data=Request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 

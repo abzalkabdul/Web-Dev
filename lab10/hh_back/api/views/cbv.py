@@ -1,9 +1,26 @@
 import json
 from django.http import JsonResponse
+from rest_framework.views import APIView
 
 from api.serializers import VacancySerializer, CompanySerializer
-from .models import Company, Vacancy
+from api.models import Company, Vacancy
 from django.views.decorators.csrf import csrf_exempt
+
+class VacancyListAPIView(APIView):
+
+    def get(self, request):
+        v_list = Vacancy.objects.all()
+        serializer = VacancySerializer(v_list, many=True, read_only=True)
+        return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 4})
+    
+    def post(self, request):
+        new_data = json.loads(request.body)
+        serializer = VacancySerializer(data=new_data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+    
 
 
 def c_list(request):
