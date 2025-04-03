@@ -5,7 +5,7 @@ urlpatterns = [
     path('companies/', views.c_list),
     path('companies/<int:company_id>/', views.get_company),
     path('companies/<int:company_id>/vacancies/', views.c_vacancies_list),
-    path('vacancies/', views.VacancyListAPIView.as_view()),
-    path('vacancies/<int:vacancy_id>/', views.get_vacancy),
+    path('vacancies/', views.vacancies_list),
+    path('vacancies/<int:vacancy_id>/', views.GetVacancyAPIView.as_view()),
     path('vacancies/top_ten/', views.list_top_ten),
 ]
