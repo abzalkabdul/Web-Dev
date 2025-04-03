@@ -2,15 +2,25 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework import status
+from rest_framework import status, generics, mixins
 
 from api.serializers import VacancySerializer, CompanySerializer
 from api.models import Company, Vacancy
 
-def c_list(request):
-    c_list = Company.objects.all()
-    serializer = CompanySerializer(c_list, many=True)
-    return JsonResponse(serializer.data, safe=False, json_dumps_params = {'indent': 4})
+
+class C_ListAPIView(mixins.ListModelMixin,
+                    mixins.CreateModelMixin,
+
+                    generics.GenericAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, args, kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        return self.create(request, args, kwargs)
+    
 
 class GetCompanyAPIView(APIView):
     def get_object(self, company_id):
