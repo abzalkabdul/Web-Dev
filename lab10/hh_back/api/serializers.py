@@ -19,7 +19,7 @@ class VacancySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vacancy
-        fields = ['id', 'name', 'description', 'salary', 'company']
+        fields = '__all__'
         
 '''
 class CompanySerializer(serializer.Serializer):
@@ -31,4 +31,4 @@ class CompanySerializer(serializer.Serializer):
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ['id', 'name', 'description', 'city', 'address']
+        fields = '__all__'

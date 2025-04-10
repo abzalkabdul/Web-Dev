@@ -1,0 +1,8 @@
+<div class="container">
+  <h2>Companies</h2>
+  <ul>
+    <li *ngFor="let company of companies" (click)="goToVacancies(company.id)" class="company">
+      <strong>{{ company.name }}</strong> — {{ company.city }}
+    </li>
+  </ul>
+</div>

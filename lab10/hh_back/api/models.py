@@ -8,6 +8,10 @@ class Company(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.city}"
+    
+    class Meta:
+        verbose_name = 'Company'
+        verbose_name_plural = 'Companies'
 
 class Vacancy(models.Model):
     name = models.CharField(max_length=100)
@@ -17,3 +21,6 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return f"{self.name} -> {self.salary}"    
+    
+    class Meta:
+        verbose_name_plural = 'Vacancies'

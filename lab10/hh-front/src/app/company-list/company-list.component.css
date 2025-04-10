@@ -1,0 +1,40 @@
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.company, .vacancy {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.company:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transform: scale(1.01);
+}
+
+.vacancy {
+  background-color: #fafafa;
+}
+
+.vacancy strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.vacancy p {
+  margin: 0.2rem 0;
+}
